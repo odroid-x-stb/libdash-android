@@ -12,7 +12,7 @@
   <name>libdash</name>
   <inceptionYear>2012</inceptionYear>
   <description>libdash android application</description>
-  <url>http://my.url/libdash</url>
+  <url>https://github.com/odroid-x-stb/libdash-android</url>
 
   <distributionManagement> 
     <site> 
@@ -23,8 +23,8 @@
 
   <developers>
     <developer>
-      <name>FF</name>
-      <email>my@email.org</email>
+      <name>Fabien Fleurey</name>
+      <email>fabien@fleurey.com</email>
     </developer>
   </developers>
 
@@ -233,36 +233,36 @@
 	  <artifactId>maven-javadoc-plugin</artifactId>
 	  <version>${plugin.javadoc.version}</version>
 	</plugin>
+	<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+	<plugin>
+	  <groupId>org.eclipse.m2e</groupId>
+	  <artifactId>lifecycle-mapping</artifactId>
+	  <version>1.0.0</version>
+	  <configuration>
+	    <lifecycleMappingMetadata>
+	      <pluginExecutions>
+		<pluginExecution>
+		  <pluginExecutionFilter>
+		    <groupId>
+		      com.mycila.maven-license-plugin
+		    </groupId>
+		    <artifactId>
+		      maven-license-plugin
+		    </artifactId>
+		    <versionRange>[1.10.b1,)</versionRange>
+		    <goals>
+		      <goal>format</goal>
+		    </goals>
+		  </pluginExecutionFilter>
+		  <action>
+		    <ignore></ignore>
+		  </action>
+		</pluginExecution>
+	      </pluginExecutions>
+	    </lifecycleMappingMetadata>
+	  </configuration>
+	</plugin>
       </plugins>
-      <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-      <plugin>
-	<groupId>org.eclipse.m2e</groupId>
-	<artifactId>lifecycle-mapping</artifactId>
-	<version>1.0.0</version>
-	<configuration>
-	  <lifecycleMappingMetadata>
-	    <pluginExecutions>
-	      <pluginExecution>
-		<pluginExecutionFilter>
-		  <groupId>
-		    com.mycila.maven-license-plugin
-		  </groupId>
-		  <artifactId>
-		    maven-license-plugin
-		  </artifactId>
-		  <versionRange>[1.10.b1,)</versionRange>
-		  <goals>
-		    <goal>format</goal>
-		  </goals>
-		</pluginExecutionFilter>
-		<action>
-		  <ignore></ignore>
-		</action>
-	      </pluginExecution>
-	    </pluginExecutions>
-	  </lifecycleMappingMetadata>
-	</configuration>
-      </plugin>
     </pluginManagement>
     
     
@@ -289,9 +289,9 @@
 	  <header>HEADER</header>
 	  <strictCheck>true</strictCheck>
 	  <properties>
-	    <owner>Owner</owner>
+	    <owner>Fabien Fleurey</owner>
 	    <year>2012</year>
-	    <email>your@mail.com</email>
+	    <email>fabien@fleurey.com</email>
 	  </properties>
 	  <excludes>
 	    <exclude>
