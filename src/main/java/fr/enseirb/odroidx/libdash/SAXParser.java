@@ -20,11 +20,13 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import android.sax.Element;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.util.Xml;
 
@@ -40,11 +42,43 @@ public class SAXParser {
 	public SAXParser(String mpdURL) {
 		this.mpdURL = mpdURL;
 		root = new RootElement(NAMESPACE, "MPD");
+		buildContentHandler();
+	}
+	
+	private void buildContentHandler() {
+		// Get Base URL
 		Element baseURL = root.getChild(NAMESPACE, "BaseURL");
 		baseURL.setEndTextElementListener(new EndTextElementListener() {
 			@Override
 			public void end(String body) {
 				segmentManager.setBaseURL(body);
+			}
+		});
+		final Element representation = root.getChild(NAMESPACE, "Period").getChild(NAMESPACE, "AdaptationSet").getChild(NAMESPACE, "Representation");
+		representation.setStartElementListener(new StartElementListener() {
+			@Override
+			public void start(Attributes attributes) {
+				Log.w(TAG, "Start representation!");	
+				// Process only the first representation at this time.
+				if ("0".equals(attributes.getValue("id"))) {
+					Log.w(TAG, "Representation 0");
+					// Get the first segment
+					Element initialization = representation.getChild(NAMESPACE, "SegmentBase").getChild(NAMESPACE, "Initialization");
+					initialization.setStartElementListener(new StartElementListener() {
+						@Override
+						public void start(Attributes attributes) {
+							segmentManager.addSegment(attributes.getValue("sourceURL"));
+						}
+					});
+					// Get the others
+					Element segmentURL = representation.getChild(NAMESPACE, "SegmentList").getChild(NAMESPACE, "SegmentURL");
+					segmentURL.setStartElementListener(new StartElementListener() {
+						@Override
+						public void start(Attributes attributes) {
+							segmentManager.addSegment(attributes.getValue("media"));	
+						}
+					});
+				}
 			}
 		});
 	}
@@ -64,6 +98,12 @@ public class SAXParser {
 					e.printStackTrace();
 				}
 				Log.d(TAG, "Base URL: " + segmentManager.getBaseURL());	
+				int count = 0;
+				while (!segmentManager.isEmpty()) {
+					count ++;
+					Log.v(TAG, "Segment URL: " + segmentManager.getSegment());
+				}
+				Log.d(TAG, "Segment number: " + count);
 			}
 		}.start();
 	}

@@ -19,10 +19,17 @@ public class SegmentManager {
 	}
 	
 	public boolean addSegment(String segmentRelativeURL) {
+		if (segmentRelativeURL == null) {
+			return false;
+		}
 		return segments.add(segmentRelativeURL);
 	}
 	
+	public boolean isEmpty() {
+		return segments.isEmpty();
+	}
+	
 	public String getSegment() {
-		return segments.getFirst();
+		return segments.pollFirst();
 	}
 }
