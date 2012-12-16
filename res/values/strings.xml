@@ -17,6 +17,6 @@
 
 -->
 <resources>
-	<string name="app_name">${rootArtifactid}</string>
+	<string name="app_name">LibDashTest</string>
    	<string name="helloworld">Hello World</string>
 </resources>
