@@ -23,6 +23,7 @@
     android:versionName="1.0" >
     <uses-permission android:name="android.permission.INTERNET"  />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-sdk 
         android:minSdkVersion="11" 
         android:targetSdkVersion="17"/>
@@ -36,6 +37,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".VideoActivity"
+            android:label="Video test">
         </activity>
     </application>
 </manifest>
