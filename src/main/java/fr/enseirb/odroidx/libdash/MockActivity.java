@@ -1,9 +1,11 @@
 package fr.enseirb.odroidx.libdash;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 
 public class MockActivity extends Activity {
@@ -17,6 +19,13 @@ public class MockActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				parser.parse();
+			}
+		});
+		((Button) findViewById(R.id.button_helloworld)).setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				startActivity(new Intent(getApplicationContext(), VideoActivity.class));
+				return true;
 			}
 		});
 	}
